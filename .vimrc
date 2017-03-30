@@ -140,4 +140,3 @@ call denite#custom#map(
   \ 'file_rec', 'sorters', ['sorter_sublime'])
 
 nnoremap <space><space> :Denite file_rec -quick-match -auto-preview -winheight=10 <cr>
-" adding this comment to test the script
