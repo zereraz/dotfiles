@@ -1,5 +1,11 @@
 # my dot files
- - vim
+ - vim (neovim)
  - tmux
+ - zsh
 
-### most of the stuff is commented well
+## updates
+ > 16/08/17 finally purescript works well with my neovim :)
+
+## todo
+ - fix the resurrect of tmux and test it
+
