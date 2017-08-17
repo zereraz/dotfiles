@@ -8,4 +8,6 @@
 
 ## todo
  - fix the resurrect of tmux and test it
-
+ - change dot file script to original here and symlinks in home
+ - add script to auto install and auto setup it in any linux/mac/windows environment
+ - make vim faster
