@@ -7,7 +7,21 @@ Plug 'raichoo/purescript-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline-themes'
+" vim themes
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
+
+" golang
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+" html
+Plug 'mattn/emmet-vim'
+Plug 'othree/html5.vim'
+
+" comments
+Plug 'tpope/vim-commentary'
+
 Plug 'jiangmiao/auto-pairs' " for autocomplete of [ , ( etc
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'frigoeu/psc-ide-vim'
@@ -16,16 +30,22 @@ Plug 'tpope/vim-obsession'
 " Plug 'ternjs/tern_for_vim'
 Plug 'ntpeters/vim-better-whitespace'
 "Plug 'Shougo/denite.nvim'
-Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'tpope/vim-sleuth'
+
+" note taking
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
+
 call plug#end()
 
 syntax on
 filetype on
 filetype plugin indent on
 set number
+set formatoptions+=o
 
 set nocompatible
 set hidden
@@ -88,6 +108,7 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>t<leader> :tabnext<cr>
 
+" pressing tab toggles, shift tab toggles back
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
@@ -104,13 +125,42 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 "color scheme
-colorscheme gruvbox
+" gruvbox old theme
+colorscheme dracula
+
+"colorscheme munich
+
+"Credit joshdick
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
 set background=dark    " Setting dark mode
 
-nnoremap ; :
+let g:airline_theme='dracula'
 
-" to enable deoplete
+" why commented? was trying g; , need to find what it is
+" nnoremap ; :
+
+
+" deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#sources#go = 'vim-go'
+" let g:deoplete#complete_method = 'omnifunc'
+
 
 " more natural split direction
 set splitbelow
@@ -173,15 +223,6 @@ noremap <leader>0 :tablast<cr>
 " enables mouse support
 set mouse=a
 
-" ctrlsf plugin (find all in sublime)
-
-" ctrl space
-if executable("ag")
-  let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
-let g:CtrlSpaceSetDefaultMapping = 1
-let g:CtrlSpaceSearchTiming = 500
-nnoremap <silent><C-Space> :CtrlSpace O<CR> " https://github.com/vim-ctrlspace/vim-ctrlspace#fuzzy-search-hints
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -190,7 +231,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 " switching between buffers/windows (right now with shift but should use alt
@@ -199,3 +240,17 @@ nmap <silent> <S-Up> :wincmd k<CR>
 nmap <silent> <S-Down> :wincmd j<CR>
 nmap <silent> <S-Left> :wincmd h<CR>
 nmap <silent> <S-Right> :wincmd l<CR>
+
+" golang
+let g:go_fmt_command = "goimports"
+
+" html
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css,gohtml EmmetInstall
+
+" https://stackoverflow.com/a/1295244
+set incsearch
+" example usage
+" /old text
+" :%s//replaced text/
+

@@ -105,4 +105,8 @@ export PATH=$HOME/Library/Android/sdk/tools:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
 
 # haskell
-export PATH="$HOME/Library/Haskell/bin:$PATH"
+export PATH=$HOME/Library/Haskell/bin:$PATH
+
+# golang
+export GOPATH=$HOME/Documents/code/go
+export PATH=$GOPATH/bin:$PATH
