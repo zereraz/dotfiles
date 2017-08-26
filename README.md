@@ -7,7 +7,7 @@
  > 16/08/17 finally purescript works well with my neovim :)
 
 ## todo
- - fix the resurrect of tmux and test it
- - change dot file script to original here and symlinks in home
+ - priority to solve ctrlp plugin with something faster, better and works in all general scenarios for me 
  - add script to auto install and auto setup it in any linux/mac/windows environment
- - make vim faster
+ - add a good workflow for notetaking and todolist (get the best of org mode in vim)
+  - ideas - using just vim notes and taskwarrior command line or my own todolist thingy
