@@ -3,7 +3,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-airline/vim-airline'
-Plug 'raichoo/purescript-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline-themes'
@@ -15,6 +14,10 @@ Plug 'dracula/vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+" purescript
+Plug 'purescript-contrib/purescript-vim'
+Plug 'frigoeu/psc-ide-vim'
+
 " html
 Plug 'mattn/emmet-vim'
 Plug 'othree/html5.vim'
@@ -24,7 +27,6 @@ Plug 'tpope/vim-commentary'
 
 Plug 'jiangmiao/auto-pairs' " for autocomplete of [ , ( etc
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'frigoeu/psc-ide-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-obsession'
 " Plug 'ternjs/tern_for_vim'
@@ -37,6 +39,7 @@ Plug 'tpope/vim-sleuth'
 " note taking
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
+Plug 'mtth/scratch.vim'
 
 
 call plug#end()
@@ -243,6 +246,12 @@ nmap <silent> <S-Right> :wincmd l<CR>
 
 " golang
 let g:go_fmt_command = "goimports"
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+" commented as would make it too slow
+" let g:go_auto_type_info = 1 " when cursor is on a valid identifier
+" set updatetime=100 " for quick update of statusline
 
 " html
 " let g:user_emmet_install_global = 0
@@ -254,3 +263,5 @@ set incsearch
 " /old text
 " :%s//replaced text/
 
+" terminal escape
+tnoremap <Esc> <C-\><C-n>
