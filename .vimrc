@@ -6,6 +6,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline-themes'
+
 " vim themes
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim'
@@ -13,6 +14,9 @@ Plug 'dracula/vim'
 " golang
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+" c/c++
+Plug 'zchee/deoplete-clang'
 
 " purescript
 Plug 'purescript-contrib/purescript-vim'
@@ -41,6 +45,14 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'mtth/scratch.vim'
 
+" vim
+Plug 'fntlnz/atags.vim'
+
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" git diff
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -274,3 +286,19 @@ set incsearch
 
 " terminal escape
 tnoremap <Esc> <C-\><C-n>
+
+" color column, should not cross that line
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=Blue
+
+" c/c++ autocomplete
+let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/4.0.1/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/4.0.1/lib/clang/'
+
+" ctags and goto definition
+map <C-\> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
+map <Leader>t :call atags#generate()<cr>
+
+" this is fzf
+set rtp+=/usr/local/opt/fzf
+

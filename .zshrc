@@ -91,11 +91,11 @@ alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 #export vim=/usr/local/Cellar/vim/bin/vim
 alias vim=nvim
-export EDITOR=vim
+export EDITOR=nvim
 export PATH="$PATH":/Users/sahebjot.singh/.local/bin
 
 #for tmux to use 256 colors
-export TERM=screen-256color
+export TERM=xterm-color
 # added psvm path for purescript
 export PATH=$HOME/.psvm/current/bin:$PATH
 
@@ -106,9 +106,21 @@ export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
 
 # haskell
 export PATH=$HOME/Library/Haskell/bin:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
 
 # golang
 export GOPATH=$HOME/Documents/code/go
 export PATH=$GOPATH/bin:$PATH
 
 export SHELL=zsh
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# postgres
+alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# this is the armory flags
+export CFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
