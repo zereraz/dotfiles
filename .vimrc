@@ -3,7 +3,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -301,4 +300,7 @@ map <Leader>t :call atags#generate()<cr>
 
 " this is fzf
 set rtp+=/usr/local/opt/fzf
+
+" fzf as ctrl-p
+map <C-p> :FZF<CR>
 

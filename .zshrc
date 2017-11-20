@@ -92,6 +92,7 @@ export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 #export vim=/usr/local/Cellar/vim/bin/vim
 alias vim=nvim
 export EDITOR=nvim
+export GIT_EDITOR=nvim
 export PATH="$PATH":/Users/sahebjot.singh/.local/bin
 
 #for tmux to use 256 colors
