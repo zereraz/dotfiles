@@ -96,7 +96,7 @@ export GIT_EDITOR=nvim
 export PATH="$PATH":/Users/sahebjot.singh/.local/bin
 
 #for tmux to use 256 colors
-export TERM=xterm-color
+export TERM=xterm-256color
 # added psvm path for purescript
 export PATH=$HOME/.psvm/current/bin:$PATH
 
@@ -125,3 +125,11 @@ alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 # this is the armory flags
 export CFLAGS="-arch x86_64"
 export ARCHFLAGS="-arch x86_64"
+
+export PATH=/Users/sahebjot.singh/.local/bin/luna-studio:$PATH
+
+# for pyenv
+# export PATH="/Users/sahebjot.singh/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+

@@ -1,6 +1,6 @@
 let mapleader = ","
 call plug#begin('~/.config/nvim/plugged')
-Plug 'tpope/vim-surround'
+
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
@@ -43,12 +43,15 @@ Plug 'tpope/vim-sleuth'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'mtth/scratch.vim'
+Plug 'vimwiki/vimwiki'
 
 " vim
 Plug 'fntlnz/atags.vim'
+Plug 'tpope/vim-surround'
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " git diff
 Plug 'airblade/vim-gitgutter'
@@ -170,6 +173,7 @@ let g:airline_theme='dracula'
 
 
 " deoplete
+set runtimepath+=~/.config/nvim/plugged/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#sources#go = 'vim-go'
@@ -192,6 +196,13 @@ au FileType purescript nm <buffer> <silent> <leader>C :<C-U>call PSCIDEcaseSplit
 au FileType purescript nm <buffer> <silent> <leader>f :<C-U>call PSCIDEaddClause("")<CR>
 au FileType purescript nm <buffer> <silent> <leader>qa :<C-U>call PSCIDEaddImportQualifications()<CR>
 au FileType purescript nm <buffer> <silent> ]d :<C-U>call PSCIDEgoToDefinition("", PSCIDEgetKeyword())<CR>
+
+let g:psc_ide_syntastic_mode = 1
+
+" paul's snippet, random port per psc-ide
+if !exists('g:psc_ide_server_port')
+  let g:psc_ide_server_port = system('echo -n $[${RANDOM}%3000+4000]')
+endif
 
 " Grepper - to find files, find all etc
 " nnoremap <leader>G :Grepper -tool ag<cr>
@@ -253,7 +264,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
@@ -302,5 +313,32 @@ map <Leader>t :call atags#generate()<cr>
 set rtp+=/usr/local/opt/fzf
 
 " fzf as ctrl-p
-map <C-p> :FZF<CR>
+nnoremap <C-p> :Files<CR>
 
+function! s:fzf_neighbouring_files()
+  let current_file =expand("%")
+  let cwd = fnamemodify(current_file, ':p:h')
+  let command = 'ag -g "" -f ' . cwd . ' --depth 0'
+
+  call fzf#run({
+        \ 'source': command,
+        \ 'sink':   'e',
+        \ 'options': '-m -x +s',
+        \ 'window':  'enew' })
+endfunction
+
+command! FZFNeigh call s:fzf_neighbouring_files()
+
+" comfortable motion
+nnoremap <silent> <C-d> :call comfortable_motion#flick(30)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-30)<CR>
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" nvim settings
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.6/bin/python3'
