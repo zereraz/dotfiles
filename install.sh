@@ -41,13 +41,27 @@ install_vimplug()
 
 install_zsh()
 {
-    setup_zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 }
 
 install_tmux()
 {
   brew install tmux
+}
+
+install_nvm()
+{
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.9/install.sh | bash
+}
+
+setup_tmux()
+{
+  brew install reattach-to-user-namespace
+}
+
+setup_nvim()
+{
+  ln -s ~/.vimrc ~/.config/nvim/init.vim
 }
 
 setup_zsh()
@@ -58,7 +72,22 @@ setup_zsh()
 install_python()
 {
   brew install python@2
-  brew install python
+  brew install python3
+}
+
+setup_python()
+{
+  /usr/local/bin/pip install neovim
+  /usr/local/bin/pip3 install neovim
+}
+
+install_powerline()
+{
+  git clone https://github.com/powerline/fonts.git --depth=1
+  cd fonts
+  ./install.sh
+  cd ..
+  rm -rf fonts
 }
 
 # create bind
@@ -66,12 +95,12 @@ install_python()
 bind(){
   output=eval $0
   functionName=$1
-  functionName output 
+  functionName output
 }
 
 install_all()
 {
-  to_install=( "zsh" "brew" "nvim" "tmux" )
+  to_install=( "zsh" "brew" "nvim" "tmux" "powerline" "nvm" )
   for software in ${to_install[@]}
   do
     if is_installed $software ; then
@@ -82,7 +111,6 @@ install_all()
         echo "installing $software"
         $fn_to_call
         setup_fn_to_call="setup_$software"
-        echo $setup_fn_to_call
         if fn_exists $setup_fn_to_call ; then
           echo "setting up $software"
           $setup_fn_to_call
