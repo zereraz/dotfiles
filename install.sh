@@ -1,13 +1,11 @@
 set -e
 
-is_installed()
-{
-  if [[ $(which $1) ]]; then
-    return 0
-  else 
-    return 1
-  fi
-}
+SUCCESS=0
+FAILURE=-1
+
+# setup_<software_name>
+# install_<software_name>
+# is_<software_name>_installed
 
 fn_exists()
 {
@@ -81,6 +79,19 @@ setup_python()
   /usr/local/bin/pip3 install neovim
 }
 
+is_powerline_installed()
+{
+  echo "calling is_powerline_installed"
+  if test $(uname) = "Darwin" ; then
+    if test ! -d "~/Library/Fonts" ; then
+      return $SUCCESS
+    else
+      echo "powerline already installed"
+    fi
+  fi
+  return $FAILURE # any non zero
+}
+
 install_powerline()
 {
   git clone https://github.com/powerline/fonts.git --depth=1
@@ -122,6 +133,22 @@ install_all()
       fi
     fi
   done
+}
+
+is_installed()
+{
+  # if is_<software_name>_installed exists call it else use default
+  fn_to_call="is_$1_installed"
+  if fn_exists $fn_to_call; then
+    echo "calling $fn_to_call"
+    $fn_to_call
+  else
+    if [[ $(which $1) ]]; then
+      return $SUCCESS
+    else
+      return $FAILURE
+    fi
+  fi
 }
 
 install_all
