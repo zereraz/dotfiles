@@ -41,12 +41,12 @@ Plug 'tpope/vim-sleuth'
 
 " note taking
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
 Plug 'mtth/scratch.vim'
 Plug 'vimwiki/vimwiki'
 
 " vim
-Plug 'fntlnz/atags.vim'
+" Plug 'fntlnz/atags.vim'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-surround'
 
 " fzf
@@ -55,6 +55,13 @@ Plug 'junegunn/fzf.vim'
 
 " git diff
 Plug 'airblade/vim-gitgutter'
+
+" motion
+Plug 'easymotion/vim-easymotion'
+
+" clojure
+" Plug 'jebberjeb/clojure-socketrepl.nvim'
+Plug 'clojure-vim/async-clj-omni'
 
 call plug#end()
 
@@ -147,22 +154,23 @@ colorscheme dracula
 
 "colorscheme munich
 
+" This is commented as it makes inside tmux and outside tmux vim look different
 "Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+"if (empty($TMUX))
+"  if (has("nvim"))
+"  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"  endif
+"  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+"  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+"  if (has("termguicolors"))
+"    set termguicolors
+"  endif
+"endif
 
 set background=dark    " Setting dark mode
 
@@ -178,6 +186,8 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#sources#go = 'vim-go'
 " let g:deoplete#complete_method = 'omnifunc'
+let g:deoplete#sources#go#gocode_binary = '/Users/sahebjotsingh/Documents/code/go/bin/gocode'
+
 
 
 " more natural split direction
@@ -288,6 +298,10 @@ autocmd FileType go nmap <Leader>i <Plug>(go-info)
 " let g:user_emmet_install_global = 0
 " autocmd FileType html,css,gohtml EmmetInstall
 
+" clojure
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+
 " https://stackoverflow.com/a/1295244
 set incsearch
 " example usage
@@ -302,12 +316,12 @@ tnoremap <Esc> <C-\><C-n>
 " highlight ColorColumn ctermbg=Blue
 
 " c/c++ autocomplete
-let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/4.0.1/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/4.0.1/lib/clang/'
+let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0/lib/clang/'
 
 " ctags and goto definition
-map <C-\> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
-map <Leader>t :call atags#generate()<cr>
+" map <C-\> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
+" map <Leader>t :call atags#generate()<cr>
 
 " this is fzf
 set rtp+=/usr/local/opt/fzf
@@ -340,5 +354,5 @@ command! -bang -nargs=* Ag
   \                 <bang>0)
 
 " nvim settings
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.6/bin/python3'
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'

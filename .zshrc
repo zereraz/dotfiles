@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/sahebjot.singh/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -52,6 +52,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git taskwarrior)
+plugins=(zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -84,8 +85,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="/Users/sahebjot.singh/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
@@ -125,11 +128,26 @@ alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 # this is the armory flags
 export CFLAGS="-arch x86_64"
 export ARCHFLAGS="-arch x86_64"
+alias ctags="`brew --prefix`/bin/ctags"
+export PATH=/Users/sahebjotsingh/Documents/juspay/kube-scripts/istio-0.7.1/bin:$PATH
+source $HOME/.cargo/env
 
-export PATH=/Users/sahebjot.singh/.local/bin/luna-studio:$PATH
+# fix it later!
+# alias watch="while :; do clear; date; bash -c $1; sleep 2; done"
+#
 
-# for pyenv
-# export PATH="/Users/sahebjot.singh/.pyenv/bin:$PATH"
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
+# export SPARK_HOME=$HOME/server/spark-2.3.0-bin-hadoop2.7
+# export SBT_HOME=$HOME/server/spark/server/sbt
+# export SCALA_HOME=$HOME/server/spark/server/scala-2.11.12
 
+# export PATH=$JAVA_HOME/bin:$SBT_HOME/bin:$SBT_HOME/lib:$SCALA_HOME/bin:$SCALA_HOME/lib:$PATH
+# export PATH=$JAVA_HOME/bin:$SPARK_HOME:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+# export PATH=$JAVA_HOME/bin:$SBT_HOME/lib:$SCALA_HOME/lib:$PATH
+# export PATH=$SPARK_HOME:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/sahebjotsingh/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/sahebjotsingh/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/sahebjotsingh/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/sahebjotsingh/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
