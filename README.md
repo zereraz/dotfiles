@@ -18,3 +18,4 @@
 ## disclaimer
  - things are quite unstable
  - use at your own risk
+ - do not use the install.sh script yet

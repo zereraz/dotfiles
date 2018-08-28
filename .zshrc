@@ -53,6 +53,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git taskwarrior)
 plugins=(zsh-autosuggestions)
+source ~/.oh-my-zsh/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -151,3 +152,7 @@ if [ -f '/Users/sahebjotsingh/Downloads/google-cloud-sdk/path.zsh.inc' ]; then s
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/sahebjotsingh/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/sahebjotsingh/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# font fix
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8

@@ -1,6 +1,4 @@
-#!/bin/zsh
-cp ~/.vimrc ./.vimrc
-cp ~/.tmux.conf ./.tmux.conf
-cp ~/.zshrc ./.zshrc
+#!/bin/bash
+./dot-to-here.sh
 git add .
 git commit && git push origin master

@@ -13,6 +13,7 @@ Plug 'dracula/vim'
 " golang
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'jodosha/vim-godebug'
 
 " c/c++
 Plug 'zchee/deoplete-clang'
@@ -152,7 +153,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " gruvbox old theme
 colorscheme dracula
 
-"colorscheme munich
+" colorscheme munich
 
 " This is commented as it makes inside tmux and outside tmux vim look different
 "Credit joshdick
@@ -353,6 +354,22 @@ command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 " nvim settings
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+" markdown
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+autocmd BufRead,BufNewFile *.wiki setlocal spell spelllang=en_us
+
+" scroll
+set scrolloff=10
+
