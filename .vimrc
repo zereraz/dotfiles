@@ -48,6 +48,7 @@ Plug 'vimwiki/vimwiki'
 " vim
 " Plug 'fntlnz/atags.vim'
 " Plug 'ludovicchabant/vim-gutentags'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-surround'
 
 " fzf
@@ -117,7 +118,7 @@ set showmatch
 set mat=2
 
 " map <Space> to / (search)
-map <space> /
+" map <space> /
 " removed due to ctrl space
 " map <c-space> ?
 
@@ -140,6 +141,7 @@ nnoremap <S-Tab> gT
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nmap <M-Tab> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " Opens a new tab with the current buffer's path
@@ -221,37 +223,6 @@ endif
 
 " ctrl + c to quit - mainly to close buffers/windows
 nnoremap <C-C> :q<cr>
-
-" denite ====================
-
-
-"call denite#custom#var('file_rec', 'command',	\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-" Change mappings.
-" call denite#custom#map(
-"       \ 'insert',
-"       \ '<C-j>',
-"       \ '<denite:move_to_next_line>',
-"       \ 'noremap'
-"       \)
-" call denite#custom#map(
-"       \ 'insert',
-"       \ '<C-k>',
-"       \ '<denite:move_to_previous_line>',
-"       \ 'noremap'
-"       \)
-"
-" " Change matchers.
-"  call denite#custom#source(
-"   \ 'file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-"  call denite#custom#source(
-"   \ 'file_rec', 'matchers', ['matcher_cpsm'])
-"
-" " Change sorters.
-"  call denite#custom#source(
-"   \ 'file_rec', 'sorters', ['sorter_sublime'])
-"
-" nnoremap <space><space> :Denite file_rec -quick-match -auto-preview -winheight=10 <cr>
 
 " Go to tab by number
 noremap <leader>1 1gt
@@ -372,4 +343,3 @@ autocmd BufRead,BufNewFile *.wiki setlocal spell spelllang=en_us
 
 " scroll
 set scrolloff=10
-

@@ -156,3 +156,24 @@ if [ -f '/Users/sahebjotsingh/Downloads/google-cloud-sdk/completion.zsh.inc' ]; 
 # font fix
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
+
+weather(){ curl -s "wttr.in/$1?m1"}
+
+function count() {
+  total=$1
+  for ((i=total; i>0; i--)); do sleep 1; printf "Time remaining $i secs \r"; done
+  echo -e "\a"
+}
+
+function dialog() {
+  osascript -e "tell app \"System Events\" to display dialog \"$1\""
+}
+
+# color for less and man 
+export MANPAGER='less -s -M +Gg'
+export LESS="--RAW-CONTROL-CHARS"
+lesscolors=$HOME/bin/.LESS_TERMCAP
+[[ -f $lesscolors ]] && . $lesscolors
+
+function anybar { echo -n $1 | nc -4u -w0 localhost ${2:-1738}; }
