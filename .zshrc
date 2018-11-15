@@ -51,8 +51,8 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git taskwarrior)
-plugins=(zsh-autosuggestions)
+# plugins=(git taskwarrior)
+plugins=(git zsh-autosuggestions)
 source ~/.oh-my-zsh/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 source $ZSH/oh-my-zsh.sh
@@ -166,14 +166,31 @@ function count() {
   echo -e "\a"
 }
 
+function repeatAndWait(){
+  while true; do
+    clear
+    echo "running again"
+    eval $2
+    sleep $1
+  done
+}
+
 function dialog() {
   osascript -e "tell app \"System Events\" to display dialog \"$1\""
 }
 
-# color for less and man 
+# color for less and man
 export MANPAGER='less -s -M +Gg'
 export LESS="--RAW-CONTROL-CHARS"
 lesscolors=$HOME/bin/.LESS_TERMCAP
 [[ -f $lesscolors ]] && . $lesscolors
 
 function anybar { echo -n $1 | nc -4u -w0 localhost ${2:-1738}; }
+
+export PATH=$GOPATH/src/github.com/uber/go-torch/FlameGraph:$PATH
+
+# aws cli autocompleter
+source /usr/local/bin/aws_zsh_completer.sh
+
+# haskell stack
+export PATH=/Users/sahebjotsingh/.local/bin:$PATH

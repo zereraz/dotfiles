@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline-themes'
 " vim themes
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim'
+Plug 'junegunn/seoul256.vim'
 
 " golang
 Plug 'fatih/vim-go'
@@ -17,6 +18,7 @@ Plug 'jodosha/vim-godebug'
 
 " c/c++
 Plug 'zchee/deoplete-clang'
+Plug 'Shougo/neoinclude.vim'
 
 " purescript
 Plug 'purescript-contrib/purescript-vim'
@@ -34,7 +36,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-obsession'
 " Plug 'ternjs/tern_for_vim'
-Plug 'ntpeters/vim-better-whitespace'
 "Plug 'Shougo/denite.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'yuttie/comfortable-motion.vim'
@@ -48,8 +49,10 @@ Plug 'vimwiki/vimwiki'
 " vim
 " Plug 'fntlnz/atags.vim'
 " Plug 'ludovicchabant/vim-gutentags'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-surround'
+" Plug 'Yggdroot/indentLine'
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -64,6 +67,14 @@ Plug 'easymotion/vim-easymotion'
 " clojure
 " Plug 'jebberjeb/clojure-socketrepl.nvim'
 Plug 'clojure-vim/async-clj-omni'
+
+" python
+Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
+
+" scala
+Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
+Plug 'derekwyatt/vim-scala'
 
 call plug#end()
 
@@ -153,7 +164,10 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 "color scheme
 " gruvbox old theme
-colorscheme dracula
+" colorscheme dracula
+let g:seoul256_background = 233
+colo seoul256
+
 
 " colorscheme munich
 
@@ -177,7 +191,8 @@ colorscheme dracula
 
 set background=dark    " Setting dark mode
 
-let g:airline_theme='dracula'
+" let g:airline_theme='dracula'
+let g:airline_theme='seoul256'
 
 " why commented? was trying g; , need to find what it is
 " nnoremap ; :
@@ -190,6 +205,12 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#sources#go = 'vim-go'
 " let g:deoplete#complete_method = 'omnifunc'
 let g:deoplete#sources#go#gocode_binary = '/Users/sahebjotsingh/Documents/code/go/bin/gocode'
+
+" deoplete scala
+" let g:deoplete#sources={}
+" let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips']
+" let g:deoplete#omni#input_patterns={}
+" let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
 
 
 
@@ -246,7 +267,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
+
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
@@ -271,8 +292,8 @@ autocmd FileType go nmap <Leader>i <Plug>(go-info)
 " autocmd FileType html,css,gohtml EmmetInstall
 
 " clojure
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+" let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
 " https://stackoverflow.com/a/1295244
 set incsearch
@@ -288,8 +309,8 @@ tnoremap <Esc> <C-\><C-n>
 " highlight ColorColumn ctermbg=Blue
 
 " c/c++ autocomplete
-let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0/lib/clang/'
+let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/7.0.0/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/7.0.0/lib/clang'
 
 " ctags and goto definition
 " map <C-\> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -343,3 +364,17 @@ autocmd BufRead,BufNewFile *.wiki setlocal spell spelllang=en_us
 
 " scroll
 set scrolloff=10
+
+" marker for 80 char
+set colorcolumn=80
+
+" on save strip white space
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+
+" identline tab
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 0
+let g:indentLine_char = '┆'
+let g:indentLine_faster = 1
+let g:indentLine_color_gui = '#FF5F00'
