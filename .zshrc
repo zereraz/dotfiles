@@ -115,10 +115,12 @@ export PATH=$HOME/.cabal/bin:$PATH
 
 # golang
 export GOPATH=$HOME/Documents/code/go
+export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
 
 export SHELL=zsh
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # postgres
 alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
@@ -179,6 +181,12 @@ function dialog() {
   osascript -e "tell app \"System Events\" to display dialog \"$1\""
 }
 
+function notification() {
+  title=${2:-"Notification"}
+  osascript -e "display notification \"$1\" with title \"$title\""
+}
+
+
 # color for less and man
 export MANPAGER='less -s -M +Gg'
 export LESS="--RAW-CONTROL-CHARS"
@@ -194,3 +202,13 @@ source /usr/local/bin/aws_zsh_completer.sh
 
 # haskell stack
 export PATH=/Users/sahebjotsingh/.local/bin:$PATH
+
+# python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+alias t=todolist
+alias ta="todolist add"
+alias tl="todolist list"
+

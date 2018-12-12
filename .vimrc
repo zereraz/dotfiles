@@ -1,80 +1,90 @@
 let mapleader = ","
 call plug#begin('~/.config/nvim/plugged')
 
+"" Utilities
 Plug 'vim-syntastic/syntastic'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline-themes'
 
-" vim themes
+"" Appearance
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'ayu-theme/ayu-vim'
+" Plug 'vim-airline/vim-airline-themes'
 
-" golang
+"" golang
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'jodosha/vim-godebug'
+"Plug 'jodosha/vim-godebug'
 
-" c/c++
-Plug 'zchee/deoplete-clang'
+"" c/c++
+"Plug 'zchee/deoplete-clang'
 Plug 'Shougo/neoinclude.vim'
 
-" purescript
+"" purescript
 Plug 'purescript-contrib/purescript-vim'
 Plug 'frigoeu/psc-ide-vim'
 
-" html
-Plug 'mattn/emmet-vim'
-Plug 'othree/html5.vim'
+"" html
+"Plug 'mattn/emmet-vim'
+"Plug 'othree/html5.vim'
 
-" comments
+"" comments
 Plug 'tpope/vim-commentary'
 
 Plug 'jiangmiao/auto-pairs' " for autocomplete of [ , ( etc
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'edkolev/tmuxline.vim'
-Plug 'tpope/vim-obsession'
-" Plug 'ternjs/tern_for_vim'
-"Plug 'Shougo/denite.nvim'
+"Plug 'tpope/vim-obsession'
+"" Plug 'ternjs/tern_for_vim'
+""Plug 'Shougo/denite.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'yuttie/comfortable-motion.vim'
-Plug 'tpope/vim-sleuth'
+"Plug 'tpope/vim-sleuth'
 
-" note taking
-Plug 'xolox/vim-misc'
-Plug 'mtth/scratch.vim'
+"" note taking
+"Plug 'xolox/vim-misc'
+"Plug 'mtth/scratch.vim'
 Plug 'vimwiki/vimwiki'
 
-" vim
-" Plug 'fntlnz/atags.vim'
-" Plug 'ludovicchabant/vim-gutentags'
+"" vim
+"" Plug 'fntlnz/atags.vim'
+"" Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-surround'
-" Plug 'Yggdroot/indentLine'
+"" Plug 'Yggdroot/indentLine'
 
-" fzf
+"" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" git diff
+"" git diff
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
-" motion
-Plug 'easymotion/vim-easymotion'
+"" productivity
+Plug 'wakatime/vim-wakatime'
+Plug 'rizzatti/dash.vim'
+Plug 'itchyny/calendar.vim'
 
-" clojure
-" Plug 'jebberjeb/clojure-socketrepl.nvim'
-Plug 'clojure-vim/async-clj-omni'
+"" motion
+"Plug 'easymotion/vim-easymotion'
 
-" python
-Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
+"" clojure
+"" Plug 'jebberjeb/clojure-socketrepl.nvim'
+"Plug 'clojure-vim/async-clj-omni'
 
-" scala
-Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
-Plug 'derekwyatt/vim-scala'
+"" python
+"Plug 'zchee/deoplete-jedi'
+"Plug 'davidhalter/jedi-vim'
+
+"" scala
+"Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'derekwyatt/vim-scala'
 
 call plug#end()
 
@@ -118,7 +128,7 @@ set shiftwidth=2 " indents width 2
 set softtabstop=2 "no. of columns for a TAB
 
 " enable powerline font
-let g:airline_powerline_fonts=1
+" let g:airline_powerline_fonts=1
 
 " use 256 colors
 set t_Co=256
@@ -164,9 +174,12 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 "color scheme
 " gruvbox old theme
-" colorscheme dracula
-let g:seoul256_background = 233
-colo seoul256
+colorscheme dracula
+" let g:seoul256_background = 233
+" colo seoul256
+set termguicolors
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 
 " colorscheme munich
@@ -192,7 +205,7 @@ colo seoul256
 set background=dark    " Setting dark mode
 
 " let g:airline_theme='dracula'
-let g:airline_theme='seoul256'
+" let g:airline_theme='seoul256'
 
 " why commented? was trying g; , need to find what it is
 " nnoremap ; :
@@ -203,8 +216,8 @@ set runtimepath+=~/.config/nvim/plugged/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#sources#go = 'vim-go'
-" let g:deoplete#complete_method = 'omnifunc'
-let g:deoplete#sources#go#gocode_binary = '/Users/sahebjotsingh/Documents/code/go/bin/gocode'
+let g:deoplete#complete_method = 'omnifunc'
+let g:deoplete#sources#go#gocode_binary = '/Users/juspay/Documents/code/go/bin/gocode'
 
 " deoplete scala
 " let g:deoplete#sources={}
@@ -283,6 +296,7 @@ let g:go_fmt_command = "goimports"
 autocmd FileType go nmap <leader>b <Plug>(go-build)
 autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap <Leader>i <Plug>(go-info)
+autocmd FileType go nmap <buffer> <silent> ]d <Plug>(go-def)
 " commented as would make it too slow
 " let g:go_auto_type_info = 1 " when cursor is on a valid identifier
 " set updatetime=100 " for quick update of statusline
@@ -355,8 +369,8 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 " nvim settings
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/Users/juspay/.pyenv/versions/2.7.6/bin/python2'
+let g:python3_host_prog = '/Users/juspay/.pyenv/versions/3.5.0/bin/python3'
 
 " markdown
 autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
@@ -378,3 +392,36 @@ let g:indentLine_concealcursor = 0
 let g:indentLine_char = '┆'
 let g:indentLine_faster = 1
 let g:indentLine_color_gui = '#FF5F00'
+
+" cursor
+set cursorline
+
+" Utilities, Dash
+nmap <silent> <leader>d <Plug>DashSearch
+
+" lightline
+set laststatus=2
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'Dracula',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \   'component': {
+      \     'lineinfo': ' %3l:%-2v',
+      \   },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+let g:lightline.separator = {
+	\   'left': '', 'right': ''
+  \}
+let g:lightline.subseparator = {
+	\   'left': '', 'right': ''
+  \}
+
+" Calendar vim
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
