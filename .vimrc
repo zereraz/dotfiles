@@ -5,6 +5,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-syntastic/syntastic'
 " Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'shime/vim-livedown'
 
 "" Appearance
 Plug 'morhetz/gruvbox'
@@ -39,7 +41,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'edkolev/tmuxline.vim'
 "Plug 'tpope/vim-obsession'
-"" Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 ""Plug 'Shougo/denite.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'yuttie/comfortable-motion.vim'
@@ -70,6 +74,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'wakatime/vim-wakatime'
 Plug 'rizzatti/dash.vim'
 Plug 'itchyny/calendar.vim'
+
+"" Javascript/Typescript
+Plug 'leafgarland/typescript-vim'
 
 "" motion
 "Plug 'easymotion/vim-easymotion'
@@ -425,3 +432,24 @@ let g:lightline.subseparator = {
 " Calendar vim
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
+
+" typescript
+let g:typescript_indent_disable = 1
+
+
+" javascript
+let g:tern#is_show_argument_hints_enabled = 1
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+set completeopt=longest,menuone,preview
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs']
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+autocmd FileType javascript nmap <buffer> <silent> ]d :TernDef<CR>
+
+" css
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
